@@ -1,7 +1,9 @@
-import { categories } from "../data/categories";
 import { useState, ChangeEvent, FormEvent } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { categories } from "../data/categories";
 import { Activity } from "../../types";
 import { FormProps } from "./formType";
+
 
 export default function Form({ dispatch }: FormProps) {
   const [activity, setActivity] = useState<Activity>({
