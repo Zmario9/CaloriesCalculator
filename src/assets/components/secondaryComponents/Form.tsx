@@ -9,13 +9,22 @@ export default function Form() {
   });
   //Metodo para definir varios tipos de datos que van a pasar por parametro en una variable a la funcion
   const handleChange=(e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>)=> {
-    //El "e.target.name" dentro de los corchetes de arreglo permite interpolar la propiedad del objeto
+    const isNumberField = ['category', 'calories'].includes(e.target.id);
+    
     setActivity({
       //Aqui descomprimo el value de las demas props de activity para que no se pierdan.
       ...activity,
-      [e.target.id]: e.target.value
+      //recordar que el signo + transforma el texto en numero
+      [e.target.id]: isNumberField ? (e.target.value.toString() === "" ? "" : +e.target.value ) : e.target.value
     });
-    console.log(e.target.value);
+  }
+
+  const isValidActivity = () => {
+    //No se extrae  category porque por default siempre será 1 y 2.
+    const {name, calories} = activity;
+    console.log(name.trim()!=='' && calories > 0);
+    //Retornará el valor de name sin espacios al inicio y si calorias es mayor a 0
+    return name.trim() !== '' && calories > 0;
   }
 
   return (
@@ -66,8 +75,9 @@ export default function Form() {
       </div>
       <input
         type="submit"
-        className="bg-gray-800 border border-transparent cursor-pointer hover:border-lime-600 hover:bg-white hover:text-lime-600 duration-200 w-full uppercase p-2 font-bold text-white rounded-lg"
-        value={activity.category == 1 ? "Guardar Comida": "Guardar Ejercicio"}
+        className="bg-gray-800 border border-transparent cursor-pointer hover:border-lime-600 hover:bg-white hover:text-lime-600 duration-200 w-full uppercase p-2 font-bold text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+        value={activity.category === 1 ? "Guardar Comida": "Guardar Ejercicio"}
+        disabled={!isValidActivity()}
       />
     </form>
   );
