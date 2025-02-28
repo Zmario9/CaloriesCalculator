@@ -39,7 +39,7 @@ export const activityReducer = (
         return {
             ...state,
             activities: updatedActivity,
-            auth: false
+            activeId:''
         }
     }
     if (action.type === 'set-activeId') {
