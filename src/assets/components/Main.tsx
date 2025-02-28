@@ -12,7 +12,7 @@ export default function Main() {
 
   return (
     <>
-      <Header />
+      <Header isEmpty={state.activities.length === 0} />
       <main>
         <section className="bg-lime-500 py-20 px-5">
           <div className="max-w-4xl mx-auto">
