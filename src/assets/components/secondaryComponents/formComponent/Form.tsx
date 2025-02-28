@@ -17,7 +17,7 @@ export default function Form({ dispatch, state }: FormProps) {
     if (state.activeId) {
       //me traera el activity que tenga la misma ID.
       //El 0 es para que retorne en este caso, un arreglo que tendrá un objeto en la posicion 0
-      const selectedActivity = state.activities.filter((stateActivity) => stateActivity.id === state.activeId)[0];
+      const selectedActivity = state.activities.filter((stateActivity: Activity) => stateActivity.id === state.activeId)[0];
       setActivity(selectedActivity);
     }
   }, [state.activeId, state.activities]);
