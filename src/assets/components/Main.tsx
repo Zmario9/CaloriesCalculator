@@ -1,5 +1,5 @@
 import Form from "./secondaryComponents/formComponent/Form";
-import ActivitiesList from "./secondaryComponents/activitiesListComponent/activitiesList";
+import ActivitiesList from "./secondaryComponents/activitiesListComponent/ActivitiesList";
 import { useReducer, useEffect } from "react";
 import { activityReducer, initialState } from "../reducers/activity-reducer";
 export default function Main() {
