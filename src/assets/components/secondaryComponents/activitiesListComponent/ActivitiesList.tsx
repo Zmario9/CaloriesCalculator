@@ -12,11 +12,10 @@ export default function ActivitiesList({
       categories.map((c) => (c.id === category ? c.name : "")),
     [activities]
   );
-  const isEmptyActivities = useMemo(() => activities.length === 0, [activities]);
   return (
     <>
       <h2 className="text-4xl font-bold text-slate-600 text-center">
-        { isEmptyActivities ? "Aún no hay actividades registradas" : "Comidas y Actividades"}
+        { activities.length === 0 ? "Aún no hay actividades registradas" : "Comidas y Actividades"}
       </h2>
       {activities.map((activity) => (
         <div
