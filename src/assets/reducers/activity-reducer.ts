@@ -1,9 +1,12 @@
 //Traigo el type activity de types
 import { Activity } from "../types"
 import { ActivityState, ActivityActions } from "./activity-reducerTypes"
-
+const localStorageActivities = () : Activity[] => {
+    const activities = localStorage.getItem('activities');
+    return activities ? JSON.parse(activities) : [];
+}
 export const initialState: ActivityState = {
-    activities: [],
+    activities: localStorageActivities(),
     activeId:''
 }
 
@@ -36,6 +39,12 @@ export const activityReducer = (
             ...state,
             //Filtro para encontrar el activity que quiero borrar
             activities: state.activities.filter(activity => activity.id !== action.payload.id)
+        }
+    }
+    if (action.type === 'restart-app') {
+        return {
+            activities: [],
+            activeId: ''
         }
     }
     return state;

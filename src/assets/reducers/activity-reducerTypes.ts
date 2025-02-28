@@ -17,4 +17,6 @@ export type ActivityActions = {
 } | {
     type:'delete-activity',
     payload: { id: Activity['id'] }
+} | {
+    type:'restart-app'
 }
