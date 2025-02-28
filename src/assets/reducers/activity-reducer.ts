@@ -1,24 +1,6 @@
 //Traigo el type activity de types
-import { unstable_batchedUpdates } from "react-dom"
 import { Activity } from "../types"
-//Defino un tipe para las acciones que se haran en el reducer
-export type ActivityActions = {
-    //Tipo de accion
-    type:'save-activity',
-    //El payload es de tipo activity, es el dato a agregar a tu state.
-    payload: { newActivity:Activity }
-} | {
-    type:'set-activeId',
-    payload: { id: Activity['id'] }
-}
-/*
-Defino el state complejo y decimos que es un arreglo
-que almacena informacion de tipo activity
-*/
-export type ActivityState = {
-    activities: Activity[],
-    activeId: Activity['id']
-}
+import { ActivityState, ActivityActions } from "./activity-reducerTypes"
 
 export const initialState: ActivityState = {
     activities: [],
@@ -46,6 +28,14 @@ export const activityReducer = (
         return {
             ...state,
             activeId: action.payload.id
+        }
+    }
+    if (action.type === 'delete-activity') {
+        return {
+            //Mantengo lo que esté en el state que pueda estar en el formulario
+            ...state,
+            //Filtro para encontrar el activity que quiero borrar
+            activities: state.activities.filter(activity => activity.id !== action.payload.id)
         }
     }
     return state;
