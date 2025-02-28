@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
-import { ActivityActions } from "../../../reducers/activity-reducer";
+import { ActivityActions, ActivityState } from "../../../reducers/activity-reducer";
 
 export type FormProps = {
-    dispatch: Dispatch<ActivityActions>
+    dispatch: Dispatch<ActivityActions>,
+    state: ActivityState
 }

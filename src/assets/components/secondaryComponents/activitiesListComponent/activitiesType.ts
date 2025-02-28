@@ -1,4 +1,7 @@
 import { Activity } from "../../../types";
-export type activitiesList = {
-    activities: Activity[]
+import { ActivityActions } from "../../../reducers/activity-reducer";
+import { Dispatch } from "react";
+export type activitiesListProps = {
+    activities: Activity[],
+    dispatch: Dispatch<ActivityActions>
 }

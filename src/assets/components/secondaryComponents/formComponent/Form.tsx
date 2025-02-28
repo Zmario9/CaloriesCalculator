@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { categories } from "../../data/categories";
 import { Activity } from "../../../types";
@@ -11,8 +11,16 @@ const initialState:Activity = {
   calories: 0,
 };
 
-export default function Form({ dispatch }: FormProps) {
+export default function Form({ dispatch, state }: FormProps) {
   const [activity, setActivity] = useState<Activity>(initialState);
+  useEffect(() => {
+    if (state.activeId) {
+      //me traera el activity que tenga la misma ID.
+      //El 0 es para que retorne en este caso, un arreglo que tendrá un objeto en la posicion 0
+      const selectedActivity = state.activities.filter((stateActivity) => stateActivity.id === state.activeId)[0];
+      setActivity(selectedActivity);
+    }
+  }, [state.activeId, state.activities]);
   //Metodo para definir varios tipos de datos que van a pasar por parametro en una variable a la funcion
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
