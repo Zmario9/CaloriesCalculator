@@ -1,3 +1,6 @@
+import { ActionDispatch } from "react";
+import { ActivityActions } from "../reducers/activity-reducerTypes";
 export type headerProps={
-    isEmpty: boolean
+    dispatch: ActionDispatch<[action: ActivityActions]>
+    canRestartApp: boolean
 }

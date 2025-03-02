@@ -10,7 +10,7 @@ export default function ActivitiesList({
   const categoryName = useMemo(
     () => (category: Activity["category"]) =>
       categories.map((c) => (c.id === category ? c.name : "")),
-    [activities]
+    []
   );
   return (
     <>
@@ -20,7 +20,7 @@ export default function ActivitiesList({
       {activities.map((activity) => (
         <div
           key={activity.id}
-          className="px-5 py-10 bg-white mt-5 flex justify-between"
+          className="px-5 py-10 bg-white mt-5 flex justify-between shadow"
         >
           <div className="space-y-2 relative">
             {/* {activity.category === 1 ? (
