@@ -1,3 +1,4 @@
+import CaloriesDisplay from "../caloriesDisplayComponent/CaloriesDisplay";
 import { CaloriesTrackerProps } from "./caloriesTrackerType";
 import { useMemo } from "react";
 export default function CaloriesTracker({ activities }: CaloriesTrackerProps) {
@@ -20,24 +21,41 @@ export default function CaloriesTracker({ activities }: CaloriesTrackerProps) {
       ),
     [activities]
   );
+
+  const totalCalories = useMemo(
+    () => caloriesConsumed - caloriesBurned,
+    [caloriesConsumed, caloriesBurned]
+  );
+
+  const caloriesMessage = useMemo(
+    () =>
+      totalCalories !== 0
+        ? totalCalories > 0
+          ? "Exceso de calorias"
+          : "Déficit de calorias"
+        : "¡Equilibrado! :D",
+    [totalCalories]
+  );
+
   return (
     <>
       <h2 className="text-4xl font-black text-white text-center">
         Resumen de Calorias
       </h2>
       <div className="flex flex-col items-center md:flex-row md:justify-between gap-5 mt-10">
-        {/* <p className="text-white font-bold rounded-full grid grid-cols-1 gap-3 text-center">
-          <span className="font-black text-6xl text-orange">
-            {caloriesConsumed}
-          </span>
-          Consumidas en alimentos
-        </p>
-        <p className="text-white font-bold rounded-full grid grid-cols-1 gap-3 text-center">
-          <span className="font-black text-6xl text-orange">
-            {caloriesBurned}
-          </span>
-          Quemadas en ejercicios
-        </p> */}
+        <CaloriesDisplay
+          calories={caloriesConsumed}
+          text={"Calorias consumidas"}
+        />
+        <CaloriesDisplay
+          calories={caloriesBurned}
+          text={"Calorias quemadas"}
+        />
+        <CaloriesDisplay
+          calories={totalCalories}
+          text={caloriesMessage}
+          isTotal={true}
+        />
       </div>
     </>
   );
